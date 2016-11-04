@@ -1,2 +1,4 @@
 document.pdf
 build/
+.idea/
+.gradle/
