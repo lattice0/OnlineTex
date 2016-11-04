@@ -13,7 +13,7 @@ public class TexSend {
             document+=line;
         }
         in.close();
-        System.out.println("enviando documento: "+document);
+        System.out.println("simulando acesso do usuário...");
         //Inicia o cliente HTTPs
         OkHttpClient client = new OkHttpClient();
         //Simula o usuário acessando a primeira página para inserir os dados
@@ -24,6 +24,8 @@ public class TexSend {
         //Monta o formulário para preencher com o conteúdo do documento .tex,
         //perceba que incluí os botões que ele disponibiliza, selecionados no
         //padrão
+        System.out.println("enviando documento para o servidor: "+document);
+
         RequestBody formBody = new FormBody.Builder()
                 .add("pole", document)
                 .add("pdf", "PDF")
@@ -36,7 +38,7 @@ public class TexSend {
                 .url("https://tex.mendelu.cz/en/")
                 .post(formBody)
                 .build();
-
+        System.out.println("salvando arquivo se nada deu errado...");
         Response response = client.newCall(request).execute();
         System.out.print("headers: "+response.headers());//printa a resposta do servidor pra caso dê algum erro
         InputStream inputStream = response.body().byteStream();
@@ -51,7 +53,7 @@ public class TexSend {
             outputStream.write(bytes, 0, read);
         }
 
-        System.out.println("Done!");
+        System.out.println("pronto!");
 
     }
 }
